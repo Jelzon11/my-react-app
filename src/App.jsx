@@ -18,14 +18,19 @@ function App() {
 
   return (
     <>
-      <div>
-        <input
-          ref={inputRef}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Your name"
-        />
-        <Greeting name={name || "Stranger"} />
+      <div className="min-h-screen p-6">
+        <div className="mx-auto mt-24 max-w-md p-8">
+          <input
+            ref={inputRef}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your name"
+            className="w-full px-4 py-2"
+          />
+          <div className="mt-6">
+            <Greeting name={name || "Stranger"} />
+          </div>
+        </div>
       </div>
     </>
   );
