@@ -1,16 +1,36 @@
-# React + Vite
+# my-react-app — Jel in Code
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Greeter app we build in the **Jel in Code** React series ("Start Early!"), made with **React + Vite**, styled with **Tailwind CSS v4**.
 
-Currently, two official plugins are available:
+📺 YouTube: https://www.youtube.com/@jelincodeyt
+📺 React JS playlist: https://www.youtube.com/playlist?list=PL5bDajeCYQMu748cAymdyfweWuH1GOvxe
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Run it
 
-## React Compiler
+```bash
+npm install
+npm run dev
+```
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+Then open the link Vite shows (usually http://localhost:5173).
 
-## Expanding the ESLint configuration
+## Follow along chapter by chapter (Part 3: Tailwind CSS)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Every chapter of the Tailwind video is saved as its own step. Click a chapter to see the code exactly as it is at the end of that chapter. You can also switch to it locally with `git checkout ch05` (and `git checkout main` to come back).
+
+| Chapter | What we add | Code |
+|---|---|---|
+| Start | Tailwind removed: plain, boring HTML | [ch00](https://github.com/Jelzon11/my-react-app/tree/ch00) |
+| 01 Utility-first | Delete `App.css` | [ch01](https://github.com/Jelzon11/my-react-app/tree/ch01) |
+| 02 Install | `tailwindcss` + `@tailwindcss/vite`, `@import "tailwindcss"` | [ch02](https://github.com/Jelzon11/my-react-app/tree/ch02) |
+| 03 Spacing | `min-h-screen`, `p-6`, `mx-auto`, `max-w-md`, `px-4 py-2` | [ch03](https://github.com/Jelzon11/my-react-app/tree/ch03) |
+| 04 Typography | `text-3xl`, `font-bold`, `tracking-widest`, `uppercase` | [ch04](https://github.com/Jelzon11/my-react-app/tree/ch04) |
+| 05 Colors | `bg-slate-100`, `text-slate-900`, `text-indigo-600` | [ch05](https://github.com/Jelzon11/my-react-app/tree/ch05) |
+| 06 Borders | `rounded-2xl`, `border`, `shadow-xl` | [ch06](https://github.com/Jelzon11/my-react-app/tree/ch06) |
+| 07 Layout | `flex`, `items-center`, `justify-between`, `grid grid-cols-3` | [ch07](https://github.com/Jelzon11/my-react-app/tree/ch07) |
+| 08 States | `hover:`, `focus:`, `active:`, `transition` | [ch08](https://github.com/Jelzon11/my-react-app/tree/ch08) |
+| 09 Responsive | `sm:grid-cols-3`, `md:text-4xl`, `md:max-w-2xl` | [ch09](https://github.com/Jelzon11/my-react-app/tree/ch09) |
+| 10 Dark mode | `@custom-variant dark`, a toggle button, `dark:` classes | [ch10](https://github.com/Jelzon11/my-react-app/tree/ch10) |
+| 11 Pro tips | `@theme` brand color, conditional classes, the `Chip` component | [ch11](https://github.com/Jelzon11/my-react-app/tree/ch11) |
+
+💬 Stuck? Ask in the comments of the video and I'll help.
