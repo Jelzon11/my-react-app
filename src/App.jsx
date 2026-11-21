@@ -23,14 +23,14 @@ function App() {
   return (
     <>
       <div className="min-h-screen p-6 bg-slate-100">
-        <div className="mx-auto mt-24 max-w-md p-8 bg-white">
+        <div className="mx-auto mt-24 max-w-md p-8 rounded-2xl border border-slate-200 bg-white shadow-xl">
           <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">Greeter</p>
           <input
             ref={inputRef}
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
-            className="w-full px-4 py-2"
+            className="w-full px-4 py-2 rounded-lg border border-slate-300"
           />
           <div className="mt-6">
             <Greeting name={name || "Stranger"} />
