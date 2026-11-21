@@ -13,7 +13,7 @@ function Chip({ label }) {
 function Greeting({ name }) {
   return (
     <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
-      Hello, <span className="text-indigo-600 dark:text-indigo-400">{name}</span>!
+      Hello, <span className={name ? "text-brand-500" : "italic text-slate-400"}>{name || "Stranger"}</span>!
     </h2>
   );
 }
@@ -49,10 +49,10 @@ function App() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
-            className="mt-6 w-full px-4 py-2 rounded-lg border border-slate-300 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+            className="mt-6 w-full px-4 py-2 rounded-lg border border-slate-300 outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/20 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
           />
           <div className="mt-6">
-            <Greeting name={name || "Stranger"} />
+            <Greeting name={name} />
           </div>
           <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-3">
             {skills.map((s) => (
