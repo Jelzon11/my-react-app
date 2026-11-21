@@ -13,7 +13,11 @@ function Chip({ label }) {
 function Greeting({ name }) {
   return (
     <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
-      Hello, <span className={name ? "text-brand-500" : "italic text-slate-400"}>{name || "Stranger"}</span>!
+      Hello,{" "}
+      <span className={name ? "text-brand-500" : "italic text-slate-400"}>
+        {name || "Stranger"}
+      </span>
+      !
     </h2>
   );
 }
@@ -36,7 +40,9 @@ function App() {
       <div className="flex items-center justify-center min-h-screen p-6 bg-slate-100 dark:bg-slate-950">
         <div className="w-full max-w-md p-8 md:max-w-2xl rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-slate-800 dark:bg-slate-900">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">Greeter</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">
+              Greeter
+            </p>
             <button
               onClick={() => setDark(!dark)}
               className="rounded-lg bg-slate-900 px-3 py-1.5 text-sm text-white transition hover:bg-slate-700 active:scale-95 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
