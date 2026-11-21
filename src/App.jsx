@@ -37,7 +37,7 @@ function App() {
           <div className="flex items-center justify-between">
             <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">Greeter</p>
             <button
-              className="rounded-lg bg-slate-900 px-3 py-1.5 text-sm text-white"
+              className="rounded-lg bg-slate-900 px-3 py-1.5 text-sm text-white transition hover:bg-slate-700 active:scale-95"
             >
               Dark
             </button>
@@ -47,7 +47,7 @@ function App() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
-            className="mt-6 w-full px-4 py-2 rounded-lg border border-slate-300"
+            className="mt-6 w-full px-4 py-2 rounded-lg border border-slate-300 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20"
           />
           <div className="mt-6">
             <Greeting name={name || "Stranger"} />
