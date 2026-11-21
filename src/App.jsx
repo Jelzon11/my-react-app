@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import "./App.css";
 
 function Greeting({ name }) {
   return <h2>Hello, {name}!</h2>;
