@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 function Greeting({ name }) {
-  return <h2 className="text-3xl font-bold text-indigo-600">Hello, {name}!</h2>;
+  return <h2>Hello, {name}!</h2>;
 }
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-slate-100">
+      <div>
         <input
           ref={inputRef}
           value={name}
