@@ -12,7 +12,7 @@ function Chip({ label }) {
 
 function Greeting({ name }) {
   return (
-    <h2 className="text-3xl font-bold tracking-tight text-slate-900">
+    <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-slate-900">
       Hello, <span className="text-indigo-600">{name}</span>!
     </h2>
   );
@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <div className="flex items-center justify-center min-h-screen p-6 bg-slate-100">
-        <div className="w-full max-w-md p-8 rounded-2xl border border-slate-200 bg-white shadow-xl">
+        <div className="w-full max-w-md p-8 md:max-w-2xl rounded-2xl border border-slate-200 bg-white shadow-xl">
           <div className="flex items-center justify-between">
             <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">Greeter</p>
             <button
@@ -52,7 +52,7 @@ function App() {
           <div className="mt-6">
             <Greeting name={name || "Stranger"} />
           </div>
-          <div className="mt-4 grid grid-cols-3 gap-2">
+          <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-3">
             {skills.map((s) => (
               <Chip key={s} label={s} />
             ))}
