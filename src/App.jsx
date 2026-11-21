@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from "react";
 
 function Greeting({ name }) {
   return (
-    <h2 className="text-3xl font-bold tracking-tight">
-      Hello, {name}!
+    <h2 className="text-3xl font-bold tracking-tight text-slate-900">
+      Hello, <span className="text-indigo-600">{name}</span>!
     </h2>
   );
 }
@@ -22,9 +22,9 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen p-6">
-        <div className="mx-auto mt-24 max-w-md p-8">
-          <p className="text-sm font-semibold uppercase tracking-widest">Greeter</p>
+      <div className="min-h-screen p-6 bg-slate-100">
+        <div className="mx-auto mt-24 max-w-md p-8 bg-white">
+          <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">Greeter</p>
           <input
             ref={inputRef}
             value={name}
