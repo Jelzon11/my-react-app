@@ -6,6 +6,8 @@ const starterTasks = [
   { id: 3, text: "Build a task app", done: false },
 ];
 
+const filters = ["All", "Active", "Done"];
+
 function Greeting({ name }) {
   return (
     <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -93,6 +95,7 @@ function App() {
     return saved ? JSON.parse(saved) : starterTasks;
   });
   const [text, setText] = useState("");
+  const [filter, setFilter] = useState("All");
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -131,7 +134,14 @@ function App() {
     setTasks(tasks.filter((t) => t.id !== id));
   }
 
+  function clearDone() {
+    setTasks(tasks.filter((t) => !t.done));
+  }
+
   const left = tasks.filter((t) => !t.done).length;
+  const visible = tasks.filter((t) =>
+    filter === "Active" ? !t.done : filter === "Done" ? t.done : true,
+  );
 
   return (
     <div className={dark ? "dark" : ""}>
@@ -174,9 +184,30 @@ function App() {
               Add
             </button>
           </form>
+          <div className="mt-4 flex items-center gap-2">
+            {filters.map((f) => (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={
+                  filter === f
+                    ? "rounded-full bg-brand-500 px-3 py-1 text-sm font-medium text-white"
+                    : "rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300"
+                }
+              >
+                {f}
+              </button>
+            ))}
+            <button
+              onClick={clearDone}
+              className="ml-auto text-sm text-slate-400 transition hover:text-red-600"
+            >
+              Clear done
+            </button>
+          </div>
           {/* READ: show every task */}
           <ul className="mt-4 divide-y divide-slate-200 dark:divide-slate-800">
-            {tasks.map((task) => (
+            {visible.map((task) => (
               <TaskItem
                 key={task.id}
                 task={task}
@@ -186,7 +217,7 @@ function App() {
               />
             ))}
           </ul>
-          {tasks.length === 0 && (
+          {visible.length === 0 && (
             <p className="py-6 text-center text-slate-400">Nothing here yet.</p>
           )}
         </div>
