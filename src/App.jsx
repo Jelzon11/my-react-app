@@ -131,6 +131,8 @@ function App() {
     setTasks(tasks.filter((t) => t.id !== id));
   }
 
+  const left = tasks.filter((t) => !t.done).length;
+
   return (
     <div className={dark ? "dark" : ""}>
       <div className="flex items-center justify-center min-h-screen p-6 bg-slate-100 dark:bg-slate-950">
@@ -155,6 +157,11 @@ function App() {
           />
           <div className="mt-6">
             <Greeting name={name} />
+            <p className="mt-1 text-slate-500 dark:text-slate-400">
+              {left === 0
+                ? "All done! 🎉"
+                : `You have ${left} ${left === 1 ? "task" : "tasks"} left.`}
+            </p>
           </div>
           <form onSubmit={addTask} className="mt-6 flex gap-2">
             <input
@@ -179,6 +186,9 @@ function App() {
               />
             ))}
           </ul>
+          {tasks.length === 0 && (
+            <p className="py-6 text-center text-slate-400">Nothing here yet.</p>
+          )}
         </div>
       </div>
     </div>
