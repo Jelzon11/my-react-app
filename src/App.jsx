@@ -1,14 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 
-const skills = ["React", "Tailwind", "JavaScript"];
-
-function Chip({ label }) {
-  return (
-    <span className="rounded-full bg-indigo-500/10 px-3 py-1 text-center text-sm font-medium text-indigo-700 dark:text-indigo-300">
-      {label}
-    </span>
-  );
-}
+const starterTasks = [
+  { id: 1, text: "Learn React basics", done: true },
+  { id: 2, text: "Style it with Tailwind", done: true },
+  { id: 3, text: "Build a task app", done: false },
+];
 
 function Greeting({ name }) {
   return (
@@ -22,9 +18,20 @@ function Greeting({ name }) {
   );
 }
 
+function TaskItem({ task }) {
+  return (
+    <li className="flex items-center gap-3 py-2">
+      <span className="flex-1 text-slate-800 dark:text-slate-100">
+        {task.text}
+      </span>
+    </li>
+  );
+}
+
 function App() {
   const [name, setName] = useState("");
   const [dark, setDark] = useState(false);
+  const [tasks] = useState(starterTasks);
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -60,11 +67,12 @@ function App() {
           <div className="mt-6">
             <Greeting name={name} />
           </div>
-          <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-3">
-            {skills.map((s) => (
-              <Chip key={s} label={s} />
+          {/* READ: show every task */}
+          <ul className="mt-4 divide-y divide-slate-200 dark:divide-slate-800">
+            {tasks.map((task) => (
+              <TaskItem key={task.id} task={task} />
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </div>
