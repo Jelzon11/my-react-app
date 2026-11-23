@@ -8,6 +8,20 @@ const starterTasks = [
 
 const filters = ["All", "Active", "Done"];
 
+// A custom hook: useState that remembers its value in localStorage
+function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    const saved = localStorage.getItem(key);
+    return saved ? JSON.parse(saved) : initialValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]); // save whenever value changes
+
+  return [value, setValue];
+}
+
 function Greeting({ name }) {
   return (
     <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -88,12 +102,9 @@ function TaskItem({ task, onToggle, onDelete, onEdit }) {
 }
 
 function App() {
-  const [name, setName] = useState("");
-  const [dark, setDark] = useState(false);
-  const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem("tasks");
-    return saved ? JSON.parse(saved) : starterTasks;
-  });
+  const [name, setName] = useLocalStorage("name", "");
+  const [dark, setDark] = useLocalStorage("dark", false);
+  const [tasks, setTasks] = useLocalStorage("tasks", starterTasks);
   const [text, setText] = useState("");
   const [filter, setFilter] = useState("All");
   const inputRef = useRef(null);
@@ -105,10 +116,6 @@ function App() {
   useEffect(() => {
     document.title = name ? `Hello, ${name}!` : "Greeter";
   }, [name]); // runs whenever name changes
-
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]); // save whenever tasks change
 
   // CREATE: add a new task
   function addTask(e) {
