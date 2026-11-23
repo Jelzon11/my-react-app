@@ -18,7 +18,7 @@ function Greeting({ name }) {
   );
 }
 
-function TaskItem({ task, onToggle }) {
+function TaskItem({ task, onToggle, onDelete }) {
   return (
     <li className="flex items-center gap-3 py-2">
       <input
@@ -36,6 +36,12 @@ function TaskItem({ task, onToggle }) {
       >
         {task.text}
       </span>
+      <button
+        onClick={() => onDelete(task.id)}
+        className="rounded-lg px-2 py-1 text-sm text-slate-400 transition hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-500/10"
+      >
+        Delete
+      </button>
     </li>
   );
 }
@@ -67,6 +73,11 @@ function App() {
   // UPDATE: tick a task on or off
   function toggleTask(id) {
     setTasks(tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+  }
+
+  // DELETE: remove a task
+  function deleteTask(id) {
+    setTasks(tasks.filter((t) => t.id !== id));
   }
 
   return (
@@ -108,7 +119,12 @@ function App() {
           {/* READ: show every task */}
           <ul className="mt-4 divide-y divide-slate-200 dark:divide-slate-800">
             {tasks.map((task) => (
-              <TaskItem key={task.id} task={task} onToggle={toggleTask} />
+              <TaskItem
+                key={task.id}
+                task={task}
+                onToggle={toggleTask}
+                onDelete={deleteTask}
+              />
             ))}
           </ul>
         </div>
