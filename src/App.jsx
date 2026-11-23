@@ -31,7 +31,8 @@ function TaskItem({ task }) {
 function App() {
   const [name, setName] = useState("");
   const [dark, setDark] = useState(false);
-  const [tasks] = useState(starterTasks);
+  const [tasks, setTasks] = useState(starterTasks);
+  const [text, setText] = useState("");
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -41,6 +42,15 @@ function App() {
   useEffect(() => {
     document.title = name ? `Hello, ${name}!` : "Greeter";
   }, [name]); // runs whenever name changes
+
+  // CREATE: add a new task
+  function addTask(e) {
+    e.preventDefault(); // stop the form from reloading the page
+    if (!text.trim()) return; // ignore empty tasks
+    const newTask = { id: crypto.randomUUID(), text: text.trim(), done: false };
+    setTasks([...tasks, newTask]);
+    setText("");
+  }
 
   return (
     <div className={dark ? "dark" : ""}>
@@ -67,6 +77,17 @@ function App() {
           <div className="mt-6">
             <Greeting name={name} />
           </div>
+          <form onSubmit={addTask} className="mt-6 flex gap-2">
+            <input
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Add a task..."
+              className="flex-1 px-4 py-2 rounded-lg border border-slate-300 outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/20 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+            />
+            <button className="rounded-lg bg-brand-500 px-4 py-2 font-semibold text-white transition hover:opacity-90 active:scale-95">
+              Add
+            </button>
+          </form>
           {/* READ: show every task */}
           <ul className="mt-4 divide-y divide-slate-200 dark:divide-slate-800">
             {tasks.map((task) => (
