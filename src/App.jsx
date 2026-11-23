@@ -18,10 +18,22 @@ function Greeting({ name }) {
   );
 }
 
-function TaskItem({ task }) {
+function TaskItem({ task, onToggle }) {
   return (
     <li className="flex items-center gap-3 py-2">
-      <span className="flex-1 text-slate-800 dark:text-slate-100">
+      <input
+        type="checkbox"
+        checked={task.done}
+        onChange={() => onToggle(task.id)}
+        className="size-5 accent-brand-500"
+      />
+      <span
+        className={
+          task.done
+            ? "flex-1 text-slate-400 line-through"
+            : "flex-1 text-slate-800 dark:text-slate-100"
+        }
+      >
         {task.text}
       </span>
     </li>
@@ -50,6 +62,11 @@ function App() {
     const newTask = { id: crypto.randomUUID(), text: text.trim(), done: false };
     setTasks([...tasks, newTask]);
     setText("");
+  }
+
+  // UPDATE: tick a task on or off
+  function toggleTask(id) {
+    setTasks(tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
   }
 
   return (
@@ -91,7 +108,7 @@ function App() {
           {/* READ: show every task */}
           <ul className="mt-4 divide-y divide-slate-200 dark:divide-slate-800">
             {tasks.map((task) => (
-              <TaskItem key={task.id} task={task} />
+              <TaskItem key={task.id} task={task} onToggle={toggleTask} />
             ))}
           </ul>
         </div>
