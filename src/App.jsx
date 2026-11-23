@@ -88,7 +88,10 @@ function TaskItem({ task, onToggle, onDelete, onEdit }) {
 function App() {
   const [name, setName] = useState("");
   const [dark, setDark] = useState(false);
-  const [tasks, setTasks] = useState(starterTasks);
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem("tasks");
+    return saved ? JSON.parse(saved) : starterTasks;
+  });
   const [text, setText] = useState("");
   const inputRef = useRef(null);
 
@@ -99,6 +102,10 @@ function App() {
   useEffect(() => {
     document.title = name ? `Hello, ${name}!` : "Greeter";
   }, [name]); // runs whenever name changes
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]); // save whenever tasks change
 
   // CREATE: add a new task
   function addTask(e) {
