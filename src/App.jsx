@@ -18,7 +18,40 @@ function Greeting({ name }) {
   );
 }
 
-function TaskItem({ task, onToggle, onDelete }) {
+function TaskItem({ task, onToggle, onDelete, onEdit }) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(task.text);
+
+  function startEdit() {
+    setDraft(task.text);
+    setEditing(true);
+  }
+
+  function save(e) {
+    e.preventDefault();
+    if (draft.trim()) onEdit(task.id, draft.trim());
+    setEditing(false);
+  }
+
+  if (editing) {
+    return (
+      <li className="py-2">
+        <form onSubmit={save} className="flex items-center gap-2">
+          <input
+            autoFocus
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => e.key === "Escape" && setEditing(false)}
+            className="flex-1 px-3 py-1.5 rounded-lg border border-slate-300 outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/20 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+          />
+          <button className="rounded-lg bg-brand-500 px-3 py-1.5 text-sm font-semibold text-white transition hover:opacity-90 active:scale-95">
+            Save
+          </button>
+        </form>
+      </li>
+    );
+  }
+
   return (
     <li className="flex items-center gap-3 py-2">
       <input
@@ -36,6 +69,12 @@ function TaskItem({ task, onToggle, onDelete }) {
       >
         {task.text}
       </span>
+      <button
+        onClick={startEdit}
+        className="rounded-lg px-2 py-1 text-sm text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+      >
+        Edit
+      </button>
       <button
         onClick={() => onDelete(task.id)}
         className="rounded-lg px-2 py-1 text-sm text-slate-400 transition hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-500/10"
@@ -73,6 +112,11 @@ function App() {
   // UPDATE: tick a task on or off
   function toggleTask(id) {
     setTasks(tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+  }
+
+  // UPDATE: change a task's text
+  function editTask(id, newText) {
+    setTasks(tasks.map((t) => (t.id === id ? { ...t, text: newText } : t)));
   }
 
   // DELETE: remove a task
@@ -124,6 +168,7 @@ function App() {
                 task={task}
                 onToggle={toggleTask}
                 onDelete={deleteTask}
+                onEdit={editTask}
               />
             ))}
           </ul>
